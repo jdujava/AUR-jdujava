@@ -16,7 +16,7 @@ optdepends=(
     'dmenu: URL selection'
     'xsel: clipboard integration'
     'xorg-xrdb: Xresources support'
-  )
+)
 makedepends=('git' 'make')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")

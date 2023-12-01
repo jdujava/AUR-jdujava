@@ -15,7 +15,7 @@ depends=('sh' 'glibc' 'libx11' 'libmpdclient' 'alsa-lib')
 optdepends=(
     'pamixer: volume indicator'
     'dunst: notification indicator'
-  )
+)
 makedepends=('git' 'make')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
