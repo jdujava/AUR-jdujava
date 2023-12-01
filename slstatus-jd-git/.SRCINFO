@@ -1,0 +1,25 @@
+pkgbase = slstatus-jd-git
+	pkgdesc = A status monitor for window managers - custom build
+	pkgver = 1.0.r11.d8241f0
+	pkgrel = 1
+	url = https://github.com/jdujava/slstatus-jd
+	arch = i686
+	arch = x86_64
+	license = ISC
+	makedepends = git
+	makedepends = make
+	depends = sh
+	depends = glibc
+	depends = libx11
+	depends = libxinerama
+	depends = libxft
+	depends = freetype2
+	depends = fontconfig
+	depends = libxcb
+	optdepends = dunst: notifications in dunstdate script
+	provides = slstatus
+	conflicts = slstatus
+	source = slstatus-jd::git+https://github.com/jdujava/slstatus-jd
+	sha256sums = SKIP
+
+pkgname = slstatus-jd-git
