@@ -1,0 +1,165 @@
+# Maintainer: Jonas Dujava <jonas.dujava@gmail.com>
+
+pkgname=base-jdujava
+pkgver=1
+pkgrel=6
+pkgdesc='Base package set of my custom Arch Linux installation'
+url='https://github.com/jdujava/AUR-jdujava'
+arch=('any')
+license=('GPL')
+depends=(
+    # window system
+    'xorg-server' 'xorg-xinit' 'xdg-utils' 'xorg-xbacklight' 'xorg-xinput' 'xorg-xrandr'
+    'xorg-xset' 'xorg-xdpyinfo' 'xorg-xwininfo'
+
+    'xdg-user-dirs' 'paru-bin'
+    'linux-firmware'
+
+    'booster'
+    'efibootmgr'
+    'systemd-boot-pacman-hook'
+    'smartmontools' 'acpi'
+    'cmake'
+
+    # drivers
+    'xf86-video-intel' 'intel-media-driver'
+    'intel-ucode'
+    'xf86-input-wacom'
+
+    # network
+    'iwd' 'ppp' 'networkmanager' 'network-manager-applet'
+
+    # fonts
+    'ttf-sourcecodepro-nerd' 'ttf-dejavu' 'ttf-roboto'
+    'ttf-font-awesome' 'ttf-joypixels'
+
+    # window manager
+    'dwm-jd-git' 'slstatus-jd-git' 'xwallpaper' 'picom-git'
+    'unclutter' 'slock'
+
+    'sxhkd' 'htop-vim'
+
+    # theming
+    'arc-gtk-theme' 'papirus-icon-theme'
+
+    # terminal
+    'st-jd-git'
+
+    # shell
+    'zsh' 'dash' 'dashbinsh'
+
+    # notification
+    'dunst' 'libnotify' 'xpub'
+
+    # editor
+    'neovim-nightly-bin' 'python-pynvim'
+
+    # file manager
+    'lf-git' 'dragon-drop-git'
+    'atool' 'zip' 'unzip' 'unrar' 'perl-file-mimeinfo' 'renameutils'
+    'ueberzug' 'ffmpegthumbnailer' 'imagemagick' 'mediainfo'
+
+    # browser
+    'chromium'
+
+    # password manager
+    'pass' 'gnome-keyring'
+
+    # scipting
+    'fzf' 'ripgrep' 'fd' 'bat' 'xdotool'
+    'xclip' 'xsel' 'clipmenu'
+    # TODO: fmenu fmenu-run clipfmenu
+
+    # utilities
+    'rsync' 'bc' 'expac' 'intel-gpu-tools' 'wget' 'usbutils'
+    'ntfs-3g'
+    'arandr' 'xkb-switch' 'xorg-xev' 'flameshot'
+
+    # git
+    'git' 'lazygit-git' 'diff-so-fancy'
+
+    # pdf/djvu viewer
+    'zathura' 'zathura-pdf-poppler' 'zathura-djvu' 'zathura-ps'
+    'pdftk' 'diffpdf'
+
+    #
+    'inkscape' 'gimp' 'lynx' 'man-db' 'man-pages'
+
+    # TODO:image viewer
+    # 'nsxiv-jd-git'
+
+    # video player
+    'mpv' 'yt-dlp'
+
+    # audio player
+    'mpd' 'mpc' 'ncmpcpp'
+
+    # dictionary
+    'words' 'sdcv'
+
+    # mail client
+    'neomutt' 'isync' 'notmuch' 'msmtp' 'simple-mtpfs'
+
+    # RSS reader
+    'newsboat' 'urlscan' 'task-spooler'
+
+    #
+    'tlp' 'throttled' 'powertop'
+)
+optdepends=(
+    'xournalpp-git: handwriting note taking'
+    'snore-git: stopwatch'
+    'translate-shell-git: command line translator'
+    'transmission-cli: torrent client'
+    'stig-git: ncurses torrent interface'
+    'mathematica'
+    'pulsemixer'
+    'pulseaudio'
+    'pulseaudio-alsa'
+    'alsa-utils'
+    'pulseaudio-bluetooth'
+    'bluez-utils'
+    'pavucontrol'
+    'pamixer'
+
+    'slop'
+    'screenkey'
+
+    'texlive-basic'
+    'texlive-bibtexextra'
+    'texlive-binextra'
+    'texlive-fontsextra'
+    'texlive-fontutils'
+    'texlive-langczechslovak'
+    'texlive-latexextra'
+    'texlive-mathscience'
+    'texlive-pictures'
+    'biber'
+    'pplatex-git'
+
+    'pacman-contrib'
+
+    'telegram-desktop'
+    'realtime-privileges'
+
+    'libreoffice-fresh'
+    'cups'
+
+    'obs-studio'
+    'npm'
+    'nmap'
+    'ninja'
+    'gnuplot'
+    'gsdjvu'
+    'gtksourceview4'
+    'hyperfine'
+    'inetutils'
+    'lostfiles'
+    'namcap'
+    'nano'
+    'vi'
+    'smu: simple markup (suckless)'
+    'figlet'
+    'dialog'
+    'cmatrix'
+)
