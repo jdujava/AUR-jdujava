@@ -3,7 +3,7 @@
 pkgname='slstatus-jd-git'
 _pkgname='slstatus'
 pkgver=1.0.r12.64427e5
-pkgrel=1
+pkgrel=2
 pkgdesc='A status monitor for window managers - custom build'
 arch=('i686' 'x86_64')
 _repo_prefix='github.com/jdujava'
@@ -32,6 +32,10 @@ pkgver() {
 
 prepare() {
     cd "$srcdir/${_repo_name}"
+    echo "CPPFLAGS+=${CPPFLAGS}" >> config.mk
+    echo "CFLAGS+=${CFLAGS}" >> config.mk
+    echo "LDFLAGS+=${LDFLAGS}" >> config.mk
+    # to use a custom config.h, place it in the package directory
     if [ -f "$srcdir/config.h" ]; then
         cp -fv "$srcdir/config.h" config.h
     fi

@@ -1,7 +1,7 @@
 pkgbase = slstatus-jd-git
 	pkgdesc = A status monitor for window managers - custom build
 	pkgver = 1.0.r12.64427e5
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/jdujava/slstatus-jd
 	arch = i686
 	arch = x86_64
