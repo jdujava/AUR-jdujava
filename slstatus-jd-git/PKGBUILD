@@ -2,7 +2,7 @@
 
 pkgname='slstatus-jd-git'
 _pkgname='slstatus'
-pkgver=1.0.r11.d8241f0
+pkgver=1.0.r12.64427e5
 pkgrel=1
 pkgdesc='A status monitor for window managers - custom build'
 arch=('i686' 'x86_64')
@@ -13,7 +13,8 @@ source=("${_repo_name}::git+https://${_repo_prefix}/${_repo_name}")
 license=('ISC')
 depends=('sh' 'glibc' 'libx11' 'libmpdclient' 'alsa-lib')
 optdepends=(
-    'dunst: notifications in dunstdate script'
+    'pamixer: volume indicator'
+    'dunst: notification indicator'
   )
 makedepends=('git' 'make')
 provides=("${_pkgname}")
