@@ -2,18 +2,21 @@
 
 pkgname=base-jdujava
 pkgver=1
-pkgrel=6
+pkgrel=7
 pkgdesc='Base package set of my custom Arch Linux installation'
 url='https://github.com/jdujava/AUR-jdujava'
 arch=('any')
 license=('GPL')
 depends=(
     # window system
-    'xorg-server' 'xorg-xinit' 'xdg-utils' 'xorg-xbacklight' 'xorg-xinput' 'xorg-xrandr'
+    'xorg-server' 'xorg-xinit' 'xdg-utils' 'xorg-xinput' 'xorg-xrandr'
     'xorg-xset' 'xorg-xdpyinfo' 'xorg-xwininfo'
 
     'xdg-user-dirs' 'paru-bin'
     'linux-firmware'
+
+    # man pages
+    'man-db' 'man-pages'
 
     'booster'
     'efibootmgr'
@@ -22,7 +25,7 @@ depends=(
     'cmake'
 
     # drivers
-    'xf86-video-intel' 'intel-media-driver'
+    'intel-media-driver'
     'intel-ucode'
     'xf86-input-wacom'
 
@@ -35,27 +38,24 @@ depends=(
 
     # window manager
     'dwm-jd-git' 'slstatus-jd-git' 'xwallpaper' 'picom-git'
-    'unclutter' 'slock'
+    'brightnessctl' 'unclutter' 'slock'
 
-    'sxhkd' 'htop-vim'
+    'sxhkd'
 
     # theming
     'arc-gtk-theme' 'papirus-icon-theme'
 
-    # terminal
-    'st-jd-git'
-
-    # shell
-    'zsh' 'dash' 'dashbinsh'
+    # terminal, shell
+    'st-jd-git' 'zsh' 'dash' 'dashbinsh'
 
     # notification
     'dunst' 'libnotify' 'xpub'
 
     # editor
-    'neovim-nightly-bin' 'python-pynvim'
+    'neovim-nightly-bin' 'python-pynvim' 'npm'
 
     # file manager
-    'lf-git' 'dragon-drop-git'
+    'lf-git' 'rsync' 'dragon-drop-git'
     'atool' 'zip' 'unzip' 'unrar' 'perl-file-mimeinfo' 'renameutils'
     'ueberzug' 'ffmpegthumbnailer' 'imagemagick' 'mediainfo'
 
@@ -71,19 +71,20 @@ depends=(
     # TODO: fmenu fmenu-run clipfmenu
 
     # utilities
-    'rsync' 'bc' 'expac' 'intel-gpu-tools' 'wget' 'usbutils'
-    'ntfs-3g'
+    'htop-vim' 'bc'
+    'expac' 'pacman-contrib'
+    'usbutils' 'ntfs-3g' 'intel-gpu-tools'
     'arandr' 'xkb-switch' 'xorg-xev' 'flameshot'
 
     # git
-    'git' 'lazygit-git' 'diff-so-fancy'
+    'git' 'lazygit-git' 'git-delta'
 
     # pdf/djvu viewer
     'zathura' 'zathura-pdf-poppler' 'zathura-djvu' 'zathura-ps'
     'pdftk' 'diffpdf'
 
-    #
-    'inkscape' 'gimp' 'lynx' 'man-db' 'man-pages'
+    # vector graphics, image manipulation
+    'inkscape' 'gimp'
 
     # TODO:image viewer
     # 'nsxiv-jd-git'
@@ -98,12 +99,12 @@ depends=(
     'words' 'sdcv'
 
     # mail client
-    'neomutt' 'isync' 'notmuch' 'msmtp' 'simple-mtpfs'
+    'neomutt' 'isync' 'notmuch' 'msmtp' 'simple-mtpfs' 'lynx'
 
     # RSS reader
     'newsboat' 'urlscan' 'task-spooler'
 
-    #
+    # power management
     'tlp' 'throttled' 'powertop'
 )
 optdepends=(
@@ -112,54 +113,53 @@ optdepends=(
     'translate-shell-git: command line translator'
     'transmission-cli: torrent client'
     'stig-git: ncurses torrent interface'
-    'mathematica'
-    'pulsemixer'
-    'pulseaudio'
-    'pulseaudio-alsa'
-    'alsa-utils'
-    'pulseaudio-bluetooth'
-    'bluez-utils'
-    'pavucontrol'
-    'pamixer'
+    'pulseaudio: sound server'
+    'pulseaudio-alsa: alsa sink/source'
+    'alsa-utils: alsa mixer'
+    'pulseaudio-bluetooth: bluetooth sink/source'
+    'bluez-utils: bluetooth utilities'
+    'pavucontrol: pulseaudio mixer'
+    'pulsemixer: command line mixer'
+    'pamixer: command line mixer'
 
-    'slop'
-    'screenkey'
-
-    'texlive-basic'
-    'texlive-bibtexextra'
-    'texlive-binextra'
+    # LaTeX and friends
+    'texlive-basic: latex, pdflatex'
+    'texlive-bibtexextra: biblatex'
+    'texlive-binextra: latexindent'
     'texlive-fontsextra'
     'texlive-fontutils'
     'texlive-langczechslovak'
-    'texlive-latexextra'
-    'texlive-mathscience'
-    'texlive-pictures'
-    'biber'
-    'pplatex-git'
-
-    'pacman-contrib'
+    'texlive-latexextra: latexmk'
+    'texlive-mathscience: siunitx'
+    'texlive-pictures: tikz'
+    'biber: biblatex backend'
+    'pplatex-git: pretty-print latex log'
+    'gnuplot: graphing/plotting utility'
+    'mathematica: symbolic computation system'
 
     'telegram-desktop'
     'realtime-privileges'
 
-    'libreoffice-fresh'
-    'cups'
+    'libreoffice-fresh: office suite'
+    'cups: printing system'
 
-    'obs-studio'
-    'npm'
-    'nmap'
-    'ninja'
-    'gnuplot'
-    'gsdjvu'
-    'gtksourceview4'
-    'hyperfine'
-    'inetutils'
-    'lostfiles'
-    'namcap'
+    # fallback editors
     'nano'
     'vi'
+
+    # misc utilities
+    'lostfiles: find files not owned by any package'
+    'namcap: package (PKGBUILD) analyzer'
+    'hyperfine: command-line benchmarking'
+    'inetutils: network utilities'
     'smu: simple markup (suckless)'
-    'figlet'
-    'dialog'
-    'cmatrix'
+    'gsdjvu: pdf to djvu'
+    'obs-studio: screen recording'
+    'slop: select screen region (used for zoom effect)'
+    'screenkey: displays key presses (e.g. for screencasts)'
+    'wget: network downloader'
+
+    # funny
+    'figlet: large ascii letters'
+    'cmatrix: hack the matrix'
 )
