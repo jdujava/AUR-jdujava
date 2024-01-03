@@ -50,4 +50,5 @@ package() {
     install -m644 -D LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
     install -m644 -D README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
     install -m644 -D st.info "$pkgdir/usr/share/$pkgname/st.info"
+    sudo tic -sx st.info
 }
