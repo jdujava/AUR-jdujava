@@ -2,54 +2,52 @@
 
 pkgname=base-jdujava
 pkgver=1
-pkgrel=7
+pkgrel=8
 pkgdesc='Base package set of my custom Arch Linux installation'
 url='https://github.com/jdujava/AUR-jdujava'
 arch=('any')
 license=('GPL')
 depends=(
-    # window system
-    'xorg-server' 'xorg-xinit' 'xdg-utils' 'xorg-xinput' 'xorg-xrandr'
-    'xorg-xset' 'xorg-xdpyinfo' 'xorg-xwininfo'
+    # package management
+    'paru-bin' 'expac' 'pacman-contrib'
 
-    'xdg-user-dirs' 'paru-bin'
-    'linux-firmware'
+    # build tools
+    'cmake' 'ninja' 'meson'
 
-    # man pages
-    'man-db' 'man-pages'
-
+    # boot
     'booster'
     'efibootmgr'
     'systemd-boot-pacman-hook'
-    'smartmontools' 'acpi'
-    'cmake'
 
     # drivers
-    'intel-media-driver'
-    'intel-ucode'
+    'linux-firmware' 'intel-ucode'
+    'xf86-video-intel' 'intel-media-driver'
     'xf86-input-wacom'
+
+    # power management
+    'tlp' 'throttled'
 
     # network
     'iwd' 'ppp' 'networkmanager' 'network-manager-applet'
 
-    # fonts
-    'ttf-sourcecodepro-nerd' 'ttf-dejavu' 'ttf-roboto'
-    'ttf-font-awesome' 'ttf-joypixels'
+    # window system
+    'xorg-server' 'xorg-xinit' 'xdg-utils' 'xorg-xinput' 'xorg-xrandr'
+    'xorg-xset' 'xorg-xdpyinfo' 'xorg-xwininfo'
 
     # window manager
-    'dwm-jd-git' 'slstatus-jd-git' 'xwallpaper' 'picom-git'
-    'brightnessctl' 'unclutter' 'slock'
+    'dwm-jd-git' 'sxhkd' 'slstatus-jd-git' 'slock'
+    'xwallpaper' 'picom-git' 'brightnessctl' 'unclutter'
 
-    'sxhkd'
-
-    # theming
-    'arc-gtk-theme' 'papirus-icon-theme'
+    # notifications
+    'dunst' 'libnotify' 'xpub'
 
     # terminal, shell
     'st-jd-git' 'zsh' 'dash' 'dashbinsh'
 
-    # notification
-    'dunst' 'libnotify' 'xpub'
+    # fonts & themes
+    'ttf-sourcecodepro-nerd' 'ttf-dejavu' 'ttf-roboto'
+    'ttf-font-awesome' 'ttf-joypixels'
+    'catppuccin-gtk-theme-frappe' 'papirus-icon-theme'
 
     # editor
     'neovim-nightly-bin' 'python-pynvim' 'npm'
@@ -59,11 +57,11 @@ depends=(
     'atool' 'zip' 'unzip' 'unrar' 'perl-file-mimeinfo' 'renameutils'
     'ueberzug' 'ffmpegthumbnailer' 'imagemagick' 'mediainfo'
 
-    # browser
-    'chromium'
-
     # password manager
     'pass' 'gnome-keyring'
+
+    # git
+    'git' 'lazygit-git' 'git-delta'
 
     # scipting
     'fzf' 'ripgrep' 'fd' 'bat' 'xdotool'
@@ -72,16 +70,20 @@ depends=(
 
     # utilities
     'htop-vim' 'bc'
-    'expac' 'pacman-contrib'
     'usbutils' 'ntfs-3g' 'intel-gpu-tools'
     'arandr' 'xkb-switch' 'xorg-xev' 'flameshot'
+    'smartmontools' 'acpi' 'xdg-user-dirs'
+    'man-db' 'man-pages'
 
-    # git
-    'git' 'lazygit-git' 'git-delta'
+    # dictionary
+    'words' 'sdcv'
 
     # pdf/djvu viewer
     'zathura' 'zathura-pdf-poppler' 'zathura-djvu' 'zathura-ps'
     'pdftk' 'diffpdf'
+
+    # browser
+    'chromium'
 
     # vector graphics, image manipulation
     'inkscape' 'gimp'
@@ -95,17 +97,11 @@ depends=(
     # audio player
     'mpd' 'mpc' 'ncmpcpp'
 
-    # dictionary
-    'words' 'sdcv'
-
     # mail client
     'neomutt' 'isync' 'notmuch' 'msmtp' 'simple-mtpfs' 'lynx'
 
     # RSS reader
     'newsboat' 'urlscan' 'task-spooler'
-
-    # power management
-    'tlp' 'throttled' 'powertop'
 )
 optdepends=(
     'xournalpp-git: handwriting note taking'
