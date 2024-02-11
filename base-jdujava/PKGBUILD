@@ -2,7 +2,7 @@
 
 pkgname=base-jdujava
 pkgver=1
-pkgrel=8
+pkgrel=9
 pkgdesc='Base package set of my custom Arch Linux installation'
 url='https://github.com/jdujava/AUR-jdujava'
 arch=('any')
@@ -61,26 +61,25 @@ depends=(
     'pass' 'gnome-keyring'
 
     # git
-    'git' 'lazygit-git' 'git-delta'
+    'git' 'git-lfs' 'lazygit-git' 'git-delta'
 
-    # scipting
+    # scripting
     'fzf' 'ripgrep' 'fd' 'bat' 'xdotool'
     'xclip' 'xsel' 'clipmenu'
-    # TODO: fmenu fmenu-run clipfmenu
+    # TODO: fmenu
 
     # utilities
-    'htop-vim' 'bc'
+    'htop-vim' 'bc' 'snore-git'
     'usbutils' 'ntfs-3g' 'intel-gpu-tools'
     'arandr' 'xkb-switch' 'xorg-xev' 'flameshot'
     'smartmontools' 'acpi' 'xdg-user-dirs'
     'man-db' 'man-pages'
 
-    # dictionary
-    'words' 'sdcv'
+    # dictionary, translator
+    'words' 'sdcv' 'translate-shell-git'
 
     # pdf/djvu viewer
     'zathura' 'zathura-pdf-poppler' 'zathura-djvu' 'zathura-ps'
-    'pdftk' 'diffpdf'
 
     # browser
     'chromium'
@@ -102,13 +101,14 @@ depends=(
 
     # RSS reader
     'newsboat' 'urlscan' 'task-spooler'
+
+    # torrent client
+    'transmission-cli' 'stig-git'
 )
 optdepends=(
     'xournalpp-git: handwriting note taking'
-    'snore-git: stopwatch'
-    'translate-shell-git: command line translator'
-    'transmission-cli: torrent client'
-    'stig-git: ncurses torrent interface'
+
+    # audio
     'pulseaudio: sound server'
     'pulseaudio-alsa: alsa sink/source'
     'alsa-utils: alsa mixer'
@@ -122,6 +122,8 @@ optdepends=(
     'texlive-basic: latex, pdflatex'
     'texlive-bibtexextra: biblatex'
     'texlive-binextra: latexindent'
+    'perl-file-homedir: latexindent dependency'
+    'perl-file-which: latexindent dependency'
     'texlive-fontsextra'
     'texlive-fontutils'
     'texlive-langczechslovak'
@@ -143,13 +145,17 @@ optdepends=(
     'nano'
     'vi'
 
+    # pdf utilities
+    'pdftk: manipulate pdf files'
+    'diffpdf: diff pdf files'
+    'gsdjvu: pdf to djvu'
+
     # misc utilities
     'lostfiles: find files not owned by any package'
     'namcap: package (PKGBUILD) analyzer'
     'hyperfine: command-line benchmarking'
     'inetutils: network utilities'
     'smu: simple markup (suckless)'
-    'gsdjvu: pdf to djvu'
     'obs-studio: screen recording'
     'slop: select screen region (used for zoom effect)'
     'screenkey: displays key presses (e.g. for screencasts)'
