@@ -2,7 +2,7 @@
 
 pkgname=base-jdujava
 pkgver=1
-pkgrel=9
+pkgrel=10
 pkgdesc='Base package set of my custom Arch Linux installation'
 url='https://github.com/jdujava/AUR-jdujava'
 arch=('any')
@@ -50,18 +50,18 @@ depends=(
     'catppuccin-gtk-theme-frappe' 'papirus-icon-theme'
 
     # editor
-    'neovim-nightly-bin' 'python-pynvim' 'npm'
+    'neovim-nightly-bin' 'python-pynvim' 'fswatch' 'npm'
 
     # file manager
     'lf-git' 'rsync' 'dragon-drop-git'
     'atool' 'zip' 'unzip' 'unrar' 'perl-file-mimeinfo' 'renameutils'
-    'ueberzug' 'ffmpegthumbnailer' 'imagemagick' 'mediainfo'
+    'ueberzugpp' 'ffmpegthumbnailer' 'imagemagick' 'mediainfo'
 
     # password manager
     'pass' 'gnome-keyring'
 
     # git
-    'git' 'git-lfs' 'lazygit-git' 'git-delta'
+    'git' 'git-lfs' 'git-filter-repo' 'lazygit-git' 'git-delta'
 
     # scripting
     'fzf' 'ripgrep' 'fd' 'bat' 'xdotool'
@@ -101,12 +101,19 @@ depends=(
 
     # RSS reader
     'newsboat' 'urlscan' 'task-spooler'
-
-    # torrent client
-    'transmission-cli' 'stig-git'
 )
 optdepends=(
+    # torrent client
+    'transmission-cli: torrent client deamon and cli tools'
+    'stig-git: torrent client TUI, broken dependency!'
+    # better to install `stig` via `pipx install stig`
+    'python-pipx: install python applications in isolated environments'
+
+    # xournalpp
     'xournalpp-git: handwriting note taking'
+    'lua-lgi: for some xournalpp plugins'
+    'libvips: for ImageActions plugin'
+    'luarocks: for ImageActions plugin' # and install lib-vips with `sudo luarocks install lua-vips`
 
     # audio
     'pulseaudio: sound server'
@@ -124,6 +131,7 @@ optdepends=(
     'texlive-binextra: latexindent'
     'perl-file-homedir: latexindent dependency'
     'perl-file-which: latexindent dependency'
+    'java-runtime>=11: ltex-ls dependency'
     'texlive-fontsextra'
     'texlive-fontutils'
     'texlive-langczechslovak'
