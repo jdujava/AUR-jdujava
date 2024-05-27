@@ -1,6 +1,6 @@
 pkgbase = st-jd-git
 	pkgdesc = A simple virtual terminal emulator for X - custom build
-	pkgver = 0.9.r37.1bb78e2
+	pkgver = 0.9.r50.922f521
 	pkgrel = 2
 	url = https://github.com/jdujava/st-jd
 	arch = i686
@@ -23,6 +23,8 @@ pkgbase = st-jd-git
 	provides = st
 	conflicts = st
 	source = st-jd::git+https://github.com/jdujava/st-jd
+	source = st-terminfo.hook
 	sha256sums = SKIP
+	sha256sums = f5003599b82ad802744d2075e1020d6221f6f57c5d2dbbe29f7d8ced1358aa27
 
 pkgname = st-jd-git
