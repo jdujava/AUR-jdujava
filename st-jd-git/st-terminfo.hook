@@ -1,0 +1,11 @@
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = ncurses
+
+[Action]
+Description = Generate st terminfo...
+When = PostTransaction
+Exec = /usr/bin/tic -sx /usr/share/st-jd-git/st.info
+Depends = st-jd-git
