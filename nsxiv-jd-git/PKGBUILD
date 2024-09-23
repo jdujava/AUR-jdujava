@@ -1,0 +1,53 @@
+# Maintainer: Jonas Dujava <jonas.dujava@gmail.com>
+
+pkgname='nsxiv-jd-git'
+_pkgname='nsxiv'
+pkgver=32.r32.18dfcd1
+pkgrel=1
+pkgdesc='Neo (or New or Not) Simple (or Small or Suckless) X Image Viewer - custom build'
+arch=('x86_64')
+_repo_prefix='github.com/jdujava'
+_repo_name="${pkgname%-git}"
+url="https://${_repo_prefix}/${_repo_name}"
+source=("${_repo_name}::git+https://${_repo_prefix}/${_repo_name}")
+license=('GPL-2.0-or-later')
+depends=(
+    'sh' 'glibc'
+    'imlib2' 'libx11'                 # core dependencies
+    'libxft' 'fontconfig' 'freetype2' # status bar
+    'libexif'                         # display exif images
+    'hicolor-icon-theme'              # make icon
+)
+makedepends=('git' 'make')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "$srcdir/${_repo_name}"
+    (
+        set -o pipefail
+        git describe --long --tags 2>/dev/null | sed "s/^[A-Za-z\.\-]*//;s/\([^-]*-\)g/r\1/;s/-/./g" ||
+            printf "r%s.%s\n" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+    )
+}
+
+prepare() {
+    cd "$srcdir/${_repo_name}"
+    # to use a custom config.h, place it in the package directory
+    [ ! -f config.h ] && cp -fv config.def.h config.h
+
+    # make install currently also runs make all
+    # see https://codeberg.org/nsxiv/nsxiv-record/issues/237
+    sed -i -e '/^install: / s|: all|:|' Makefile
+}
+
+build() {
+    cd "$srcdir/${_repo_name}"
+    make
+}
+
+package() {
+    cd "$srcdir/${_repo_name}"
+    make PREFIX=/usr DESTDIR="$pkgdir" install-all
+}

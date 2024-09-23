@@ -1,0 +1,24 @@
+pkgbase = nsxiv-jd-git
+	pkgdesc = Neo (or New or Not) Simple (or Small or Suckless) X Image Viewer - custom build
+	pkgver = 32.r32.18dfcd1
+	pkgrel = 1
+	url = https://github.com/jdujava/nsxiv-jd
+	arch = x86_64
+	license = GPL-2.0-or-later
+	makedepends = git
+	makedepends = make
+	depends = sh
+	depends = glibc
+	depends = imlib2
+	depends = libx11
+	depends = libxft
+	depends = fontconfig
+	depends = freetype2
+	depends = libexif
+	depends = hicolor-icon-theme
+	provides = nsxiv
+	conflicts = nsxiv
+	source = nsxiv-jd::git+https://github.com/jdujava/nsxiv-jd
+	sha256sums = SKIP
+
+pkgname = nsxiv-jd-git
