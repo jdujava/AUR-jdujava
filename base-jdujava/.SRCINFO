@@ -1,7 +1,7 @@
 pkgbase = base-jdujava
 	pkgdesc = Base package set of my custom Arch Linux installation
 	pkgver = 1
-	pkgrel = 10
+	pkgrel = 11
 	url = https://github.com/jdujava/AUR-jdujava
 	arch = any
 	license = GPL
@@ -112,6 +112,7 @@ pkgbase = base-jdujava
 	depends = chromium
 	depends = inkscape
 	depends = gimp
+	depends = nsxiv-jd-git
 	depends = mpv
 	depends = yt-dlp
 	depends = mpd
@@ -143,7 +144,7 @@ pkgbase = base-jdujava
 	optdepends = pamixer: command line mixer
 	optdepends = texlive-basic: latex, pdflatex
 	optdepends = texlive-bibtexextra: biblatex
-	optdepends = texlive-binextra: latexindent
+	optdepends = texlive-binextra: latexindent, pdfjam
 	optdepends = perl-file-homedir: latexindent dependency
 	optdepends = perl-file-which: latexindent dependency
 	optdepends = java-runtime>=11: ltex-ls dependency

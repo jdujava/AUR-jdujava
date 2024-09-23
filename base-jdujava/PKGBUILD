@@ -2,7 +2,7 @@
 
 pkgname=base-jdujava
 pkgver=1
-pkgrel=10
+pkgrel=11
 pkgdesc='Base package set of my custom Arch Linux installation'
 url='https://github.com/jdujava/AUR-jdujava'
 arch=('any')
@@ -24,7 +24,7 @@ depends=(
     'xf86-video-intel' 'intel-media-driver'
     'xf86-input-wacom'
 
-    # power management
+    # power management, undervolting
     'tlp' 'throttled'
 
     # network
@@ -87,8 +87,8 @@ depends=(
     # vector graphics, image manipulation
     'inkscape' 'gimp'
 
-    # TODO:image viewer
-    # 'nsxiv-jd-git'
+    # image viewer
+    'nsxiv-jd-git'
 
     # video player
     'mpv' 'yt-dlp'
@@ -128,7 +128,7 @@ optdepends=(
     # LaTeX and friends
     'texlive-basic: latex, pdflatex'
     'texlive-bibtexextra: biblatex'
-    'texlive-binextra: latexindent'
+    'texlive-binextra: latexindent, pdfjam'
     'perl-file-homedir: latexindent dependency'
     'perl-file-which: latexindent dependency'
     'java-runtime>=11: ltex-ls dependency'
