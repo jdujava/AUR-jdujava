@@ -120,6 +120,7 @@ optdepends=(
     'pulseaudio-alsa: alsa sink/source'
     'alsa-utils: alsa mixer'
     'pulseaudio-bluetooth: bluetooth sink/source'
+    'blueman: bluetooth manager'
     'bluez-utils: bluetooth utilities'
     'pavucontrol: pulseaudio mixer'
     'pulsemixer: command line mixer'
