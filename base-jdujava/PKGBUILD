@@ -35,7 +35,7 @@ depends=(
     'xorg-xset' 'xorg-xdpyinfo' 'xorg-xwininfo'
 
     # window manager
-    'dwm-jd-git' 'sxhkd' 'slstatus-jd-git' 'slock'
+    'dwm-jd-git' 'sxhkd' 'slstatus-jd-git' 'slock-jd-git'
     'xwallpaper' 'picom-git' 'brightnessctl' 'unclutter'
 
     # notifications
@@ -119,12 +119,18 @@ optdepends=(
     'pulseaudio: sound server'
     'pulseaudio-alsa: alsa sink/source'
     'alsa-utils: alsa mixer'
-    'pulseaudio-bluetooth: bluetooth sink/source'
-    'blueman: bluetooth manager'
-    'bluez-utils: bluetooth utilities'
     'pavucontrol: pulseaudio mixer'
     'pulsemixer: command line mixer'
     'pamixer: command line mixer'
+
+    # bluetooth
+    'bluez-utils: bluetooth utilities'
+    'pulseaudio-bluetooth: bluetooth sink/source'
+    'blueman: bluetooth manager'
+    'playerctl: MPRIS media player controller'
+    'playerctld-systemd-unit: systemd unit for playerctld'
+    'mpv-mpris: MPRIS support for MPV'
+    'mpd-mpris: MPRIS support for MPD'
 
     # LaTeX and friends
     'texlive-basic: latex, pdflatex'
