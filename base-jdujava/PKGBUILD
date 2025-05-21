@@ -2,7 +2,7 @@
 
 pkgname=base-jdujava
 pkgver=1
-pkgrel=11
+pkgrel=12
 pkgdesc='Base package set of my custom Arch Linux installation'
 url='https://github.com/jdujava/AUR-jdujava'
 arch=('any')
@@ -51,6 +51,7 @@ depends=(
 
     # editor
     'neovim-nightly-bin' 'python-pynvim' 'fswatch' 'npm'
+    'tree-sitter' 'tree-sitter-cli'
 
     # file manager
     'lf-git' 'rsync' 'dragon-drop-git'
@@ -134,18 +135,16 @@ optdepends=(
 
     # LaTeX and friends
     'texlive-basic: latex, pdflatex'
+    'texlive-luatex: lualatex'
     'texlive-bibtexextra: biblatex'
+    'biber: biblatex backend'
     'texlive-binextra: latexindent, pdfjam'
     'perl-file-homedir: latexindent dependency'
-    'perl-file-which: latexindent dependency'
-    'java-runtime>=11: ltex-ls dependency'
-    'texlive-fontsextra'
-    'texlive-fontutils'
-    'texlive-langczechslovak'
-    'texlive-latexextra: latexmk'
-    'texlive-mathscience: siunitx'
+    'perl-yaml-tiny: latexindent dependency'
+    'texlive-fontsextra: various fonts such as stmaryrd, cmbright, iwona, and fetamont'
+    'texlive-latexextra: latexmk, zref-clever, tcolorbox, ...'
+    'texlive-mathscience: siunitx, physics, delimset, eqnlines, keytheorems, ...'
     'texlive-pictures: tikz'
-    'biber: biblatex backend'
     'pplatex-git: pretty-print latex log'
     'gnuplot: graphing/plotting utility'
     'mathematica: symbolic computation system'
@@ -164,8 +163,10 @@ optdepends=(
     'pdftk: manipulate pdf files'
     'diffpdf: diff pdf files'
     'gsdjvu: pdf to djvu'
+    'pdf.tocgen: generate ToC for PDF documents'
 
     # misc utilities
+    'dysk: report disk usage, alternative to df'
     'lostfiles: find files not owned by any package'
     'namcap: package (PKGBUILD) analyzer'
     'hyperfine: command-line benchmarking'
@@ -175,6 +176,7 @@ optdepends=(
     'slop: select screen region (used for zoom effect)'
     'screenkey: displays key presses (e.g. for screencasts)'
     'wget: network downloader'
+    'syncthing: synchronize files across multiple devices'
 
     # funny
     'figlet: large ascii letters'
