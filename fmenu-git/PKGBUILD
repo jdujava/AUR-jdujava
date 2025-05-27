@@ -1,0 +1,47 @@
+# Maintainer: Jonas Dujava <jonas.dujava@gmail.com>
+
+pkgname='fmenu-git'
+_pkgname='fmenu'
+pkgver=r12.30e24dc
+pkgrel=1
+pkgdesc='A fuzzy-selection dynamic menu and related scripts'
+arch=('i686' 'x86_64' 'armv7h' 'aarch64')
+_repo_prefix='github.com/jdujava'
+_repo_name="${pkgname%-git}"
+url="https://${_repo_prefix}/${_repo_name}"
+source=("${_repo_name}::git+https://${_repo_prefix}/${_repo_name}")
+license=('MIT')
+depends=('sh' 'fzf' 'dmenu' 'xsel')
+optdepends=(
+    'xdotool: for typing out selection to the terminal'
+    'xdg-utils: for xdg-mime used in fzfopen'
+    'gtk3: for gtk-launch used in fzfopen'
+    'libnotify: for notify-send used in fzfopen'
+    'dunst: for notify-send used in fzfopen'
+    'man-db: for creating manpage index database used in mfzf'
+    'pass: password manager used in passfmenu'
+    'xclip: clipboard support for pass in passfmenu'
+    'clipmenu: for clipboard history accessed by clipfmenu'
+    'sdcv: utility for dictionaries used in fdict'
+    'translate-shell: interface for translations used in fdict'
+)
+makedepends=('git' 'make')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "$srcdir/${_repo_name}"
+    (
+        set -o pipefail
+        git describe --long --tags 2>/dev/null | sed "s/^[A-Za-z\.\-]*//;s/\([^-]*-\)g/r\1/;s/-/./g" ||
+            printf "r%s.%s\n" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+    )
+}
+
+package() {
+    cd "$srcdir/${_repo_name}"
+    make PREFIX=/usr DESTDIR="$pkgdir" install
+    install -m644 -D LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    install -m644 -D README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}
