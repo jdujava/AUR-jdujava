@@ -2,8 +2,8 @@
 
 pkgname='dwm-jd-git'
 _pkgname='dwm'
-pkgver=6.4.r45.84b4b81
-pkgrel=2
+pkgver=6.4.r61.0b9e428
+pkgrel=1
 pkgdesc='A dynamic window manager for X - custom build'
 arch=('i686' 'x86_64' 'arm' 'armv7h' 'armv6h' 'aarch64')
 _repo_prefix='github.com/jdujava'
@@ -13,7 +13,8 @@ source=("${_repo_name}::git+https://${_repo_prefix}/${_repo_name}")
 license=('MIT')
 depends=('sh' 'glibc' 'libx11' 'libxinerama' 'libxft' 'freetype2' 'fontconfig' 'libxcb')
 optdepends=(
-    'dmenu: program launcher'
+    'fmenu: for launching programs/scripts'
+    'dmenu: program launcher (fallback)'
     'dunst: notifications in dunstdate script'
     'st: terminal emulator'
     'slstatus: customizable status bar'

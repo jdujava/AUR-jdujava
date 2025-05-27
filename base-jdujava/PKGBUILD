@@ -2,7 +2,7 @@
 
 pkgname=base-jdujava
 pkgver=1
-pkgrel=12
+pkgrel=13
 pkgdesc='Base package set of my custom Arch Linux installation'
 url='https://github.com/jdujava/AUR-jdujava'
 arch=('any')
@@ -66,15 +66,14 @@ depends=(
 
     # scripting
     'fzf' 'ripgrep' 'fd' 'bat' 'xdotool'
-    'xclip' 'xsel' 'clipmenu'
-    # TODO: fmenu
+    'fmenu' 'xclip' 'xsel' 'clipmenu'
 
     # utilities
-    'htop-vim' 'bc' 'snore-git'
+    'htop-vim' 'bc' 'snore-git' 'dust'
     'usbutils' 'ntfs-3g' 'intel-gpu-tools'
     'arandr' 'xkb-switch' 'xorg-xev' 'flameshot'
     'smartmontools' 'acpi' 'xdg-user-dirs'
-    'man-db' 'man-pages'
+    'man-db' 'man-pages' 'wiki-tui'
 
     # dictionary, translator
     'words' 'sdcv' 'translate-shell-git'
@@ -111,7 +110,8 @@ optdepends=(
     'python-pipx: install python applications in isolated environments'
 
     # xournalpp
-    'xournalpp-git: handwriting note taking'
+    'xournalpp: handwriting note taking'
+    'libxml2-legacy: temporary depency for xournalpp'
     'lua-lgi: for some xournalpp plugins'
     'libvips: for ImageActions plugin'
     'luarocks: for ImageActions plugin' # and install lib-vips with `sudo luarocks install lua-vips`
