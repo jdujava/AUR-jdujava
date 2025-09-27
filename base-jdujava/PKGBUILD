@@ -2,7 +2,7 @@
 
 pkgname=base-jdujava
 pkgver=1
-pkgrel=13
+pkgrel=14
 pkgdesc='Base package set of my custom Arch Linux installation'
 url='https://github.com/jdujava/AUR-jdujava'
 arch=('any')
@@ -46,7 +46,7 @@ depends=(
 
     # fonts & themes
     'ttf-sourcecodepro-nerd' 'ttf-dejavu' 'ttf-roboto'
-    'ttf-font-awesome' 'ttf-joypixels'
+    'woff2-font-awesome' 'ttf-joypixels'
     'catppuccin-gtk-theme-frappe' 'papirus-icon-theme'
 
     # editor
@@ -62,7 +62,7 @@ depends=(
     'pass' 'gnome-keyring'
 
     # git
-    'git' 'git-lfs' 'git-filter-repo' 'lazygit-git' 'git-delta'
+    'git' 'git-lfs' 'git-filter-repo' 'lazygit' 'git-delta'
 
     # scripting
     'fzf' 'ripgrep' 'fd' 'bat' 'xdotool'
@@ -98,11 +98,11 @@ depends=(
 
     # mail client
     'neomutt' 'isync' 'notmuch' 'msmtp' 'simple-mtpfs' 'lynx'
-
-    # RSS reader
-    'newsboat' 'urlscan' 'task-spooler'
 )
 optdepends=(
+    # RSS reader
+    'newsboat' 'urlscan' 'task-spooler'
+
     # torrent client
     'transmission-cli: torrent client deamon and cli tools'
     'stig-git: torrent client TUI, broken dependency!'
@@ -145,6 +145,7 @@ optdepends=(
     'texlive-latexextra: latexmk, zref-clever, tcolorbox, ...'
     'texlive-mathscience: siunitx, physics, delimset, eqnlines, keytheorems, ...'
     'texlive-pictures: tikz'
+    'texlive-fontutils: rarely needed'
     'pplatex-git: pretty-print latex log'
     'gnuplot: graphing/plotting utility'
     'mathematica: symbolic computation system'
@@ -164,6 +165,7 @@ optdepends=(
     'diffpdf: diff pdf files'
     'gsdjvu: pdf to djvu'
     'pdf.tocgen: generate ToC for PDF documents'
+    'qpdf: content-preserving PDF transformations'
 
     # misc utilities
     'dysk: report disk usage, alternative to df'
