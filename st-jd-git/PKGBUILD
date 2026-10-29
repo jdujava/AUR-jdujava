@@ -2,8 +2,8 @@
 
 pkgname='st-jd-git'
 _pkgname='st'
-pkgver=0.9.r59.f631d54
-pkgrel=1
+pkgver=0.9.r63.fd690a9
+pkgrel=2
 pkgdesc='A simple virtual terminal emulator for X - custom build'
 arch=('i686' 'x86_64' 'armv7h' 'aarch64')
 _repo_prefix='github.com/jdujava'
@@ -11,7 +11,7 @@ _repo_name="${pkgname%-git}"
 url="https://${_repo_prefix}/${_repo_name}"
 source=("${_repo_name}::git+https://${_repo_prefix}/${_repo_name}" "st-terminfo.hook")
 license=('MIT')
-depends=('sh' 'glibc' 'libx11' 'fontconfig' 'freetype2' 'libxrender' 'libxft')
+depends=('sh' 'glibc' 'ncurses' 'libx11' 'fontconfig' 'freetype2' 'libxrender' 'libxft')
 optdepends=(
     'fmenu: URL selection and output copy'
     'xsel: clipboard integration'
@@ -20,7 +20,7 @@ optdepends=(
 makedepends=('git' 'make')
 provides=("${_pkgname}")
 conflicts=("${_pkgname}")
-sha256sums=('SKIP' 'f5003599b82ad802744d2075e1020d6221f6f57c5d2dbbe29f7d8ced1358aa27')
+sha256sums=('SKIP' '54f4df3393b3887306e485f5fa3865af16bcd4608245fbaf37db53b6a38de059')
 
 pkgver() {
     cd "$srcdir/${_repo_name}"
@@ -51,6 +51,6 @@ package() {
     make PREFIX=/usr DESTDIR="$pkgdir" install
     install -m644 -D LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
     install -m644 -D README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+    # The pacman hook compiles terminfo; ncurses owns the shared entries.
     install -m644 -D st.info "$pkgdir/usr/share/$pkgname/st.info"
-    sudo tic -sx st.info
 }

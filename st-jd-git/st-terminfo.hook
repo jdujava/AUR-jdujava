@@ -2,10 +2,12 @@
 Type = Package
 Operation = Install
 Operation = Upgrade
+Target = st-jd-git
 Target = ncurses
 
 [Action]
 Description = Generate st terminfo...
 When = PostTransaction
-Exec = /usr/bin/tic -sx /usr/share/st-jd-git/st.info
+Exec = /usr/bin/tic -sx -o /usr/share/terminfo /usr/share/st-jd-git/st.info
 Depends = st-jd-git
+Depends = ncurses
