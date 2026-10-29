@@ -1,15 +1,15 @@
 # Maintainer: Jonas Dujava <jonas.dujava@gmail.com>
 
 pkgname=base-jdujava
-pkgver=1
-pkgrel=14
+pkgver=2
+pkgrel=1
 pkgdesc='Base package set of my custom Arch Linux installation'
 url='https://github.com/jdujava/AUR-jdujava'
 arch=('any')
-license=('GPL')
+license=('GPL-1.0-or-later')
 depends=(
     # package management
-    'paru-bin' 'expac' 'pacman-contrib'
+    'paru' 'expac' 'pacman-contrib'
 
     # build tools
     'cmake' 'ninja' 'meson'
@@ -21,28 +21,64 @@ depends=(
 
     # drivers
     'linux-firmware' 'intel-ucode'
-    'xf86-video-intel' 'intel-media-driver'
-    'xf86-input-wacom'
+    'intel-media-driver'  # VA-API video decoding on the Intel GPU
+    # No xf86-video-intel: the optional X11 session uses modesetting.
 
     # power management, undervolting
     'tlp' 'throttled'
 
-    # network
+    # network and remote access
     'iwd' 'ppp' 'networkmanager' 'network-manager-applet'
+    'openssh'  # SSH client/server and agent
 
-    # window system
-    'xorg-server' 'xorg-xinit' 'xdg-utils' 'xorg-xinput' 'xorg-xrandr'
-    'xorg-xset' 'xorg-xdpyinfo' 'xorg-xwininfo'
+    # Wayland compositor and bar
+    # Mango also pulls in XWayland and the rendering libraries.
+    'mango-jd-git'   # custom compositor
+    'waybar-jd-git'  # custom bar with native Mango modules
 
-    # window manager
-    'dwm-jd-git' 'sxhkd' 'slstatus-jd-git' 'slock-jd-git'
-    'xwallpaper' 'picom-git' 'brightnessctl' 'unclutter'
+    # session locking and idle handling
+    'swaylock'  # screen lock
+    'swayidle'  # idle/suspend hooks for locking and display power
+
+    # displays and wallpaper
+    'swaybg'         # static wallpaper
+    'brightnessctl'  # hardware brightness keys
+    'wlr-randr'      # output configuration
+
+    # portals and desktop integration
+    'xdg-utils'               # xdg-open and MIME associations
+    'xdg-desktop-portal-wlr'   # screen sharing and screenshots
+    'xdg-desktop-portal-gtk'   # file chooser and other ordinary portals
+
+    # clipboard and typing
+    'cliphist'  # text/image history; pulls in wl-clipboard
+    'wtype'     # type selected passwords/one-liners into Wayland applications
+
+    # screen capture and OCR
+    'grim'         # screenshots
+    'slurp'        # region selection
+    'satty'        # screenshot annotation
+    'wf-recorder'  # screen recording
+    'tesseract-data-eng'  # English OCR data; pulls in tesseract
+
+    # audio
+    'pipewire-pulse'  # PipeWire audio with PulseAudio compatibility
+    'wireplumber'     # audio routing and device policy, including Bluetooth audio
+
+    # Bluetooth
+    'blueman'  # tray and pairing dialog; pulls in bluez
+
+    # media controls
+    'playerctld-systemd-unit'  # shared player selection for media keys; pulls in playerctl
+    'mpd-mpris'                # expose MPD to the same MPRIS controls
 
     # notifications
-    'dunst' 'libnotify' 'xpub'
+    'dunst' 'libnotify'  # notification daemon, dunstify and notify-send
+    'xpub'              # USB-device notifications
 
     # terminal, shell
-    'st-jd-git' 'zsh' 'dash' 'dashbinsh'
+    'foot'  # Wayland terminal with native sixel previews
+    'zsh' 'dash' 'dashbinsh'
 
     # fonts & themes
     'ttf-sourcecodepro-nerd' 'ttf-dejavu' 'ttf-roboto'
@@ -56,7 +92,7 @@ depends=(
     # file manager
     'lf-git' 'rsync' 'dragon-drop-git'
     'atool' 'zip' 'unzip' 'unrar' 'perl-file-mimeinfo' 'renameutils'
-    'ueberzugpp' 'ffmpegthumbnailer' 'imagemagick' 'mediainfo'
+    'chafa' 'ffmpegthumbnailer' 'imagemagick' 'mediainfo'  # sixel/thumbnail previews
 
     # password manager
     'pass' 'gnome-keyring'
@@ -64,14 +100,13 @@ depends=(
     # git
     'git' 'git-lfs' 'git-filter-repo' 'lazygit' 'git-delta'
 
-    # scripting
-    'fzf' 'ripgrep' 'fd' 'bat' 'xdotool'
-    'fmenu' 'xclip' 'xsel' 'clipmenu'
+    # scripting and pickers
+    'ripgrep' 'fd' 'bat' 'jq'  # searches, previews and compositor JSON
+    'fmenu-git'              # fuzzy pickers and Wayland helpers; pulls in fzf
 
     # utilities
     'htop-vim' 'bc' 'snore-git' 'dust'
     'usbutils' 'ntfs-3g' 'intel-gpu-tools'
-    'arandr' 'xkb-switch' 'xorg-xev' 'flameshot'
     'smartmontools' 'acpi' 'xdg-user-dirs'
     'man-db' 'man-pages' 'wiki-tui'
 
@@ -100,49 +135,81 @@ depends=(
     'neomutt' 'isync' 'notmuch' 'msmtp' 'simple-mtpfs' 'lynx'
 )
 optdepends=(
+    # Wayland display tools and diagnostics
+    'wdisplays: manual display arrangement through waydisplay'
+    'wl-mirror: mirror a display onto a monitor or projector through waydisplay'
+    'wev: inspect Wayland keyboard/pointer events when debugging bindings'
+
+    # X11 fallback: install these only for the optional startx session.
+    'xorg-server: fallback display server'
+    'xorg-xinit: start the fallback with startx'
+    'dwm-jd-git: fallback window manager'
+    'st-jd-git: fallback terminal'
+    'slstatus-jd-git: fallback status bar'
+    'slock-jd-git: fallback lock and pre-suspend hook'
+    'sxhkd: fallback keyboard shortcuts'
+    'picom-git: fallback compositor through picom-wrapper'
+
+    # X11 display, input and wallpaper
+    'arandr: fallback manual display arrangement through displayselect'
+    'xorg-xinput: fallback touchpad and touchscreen controls'
+    'xorg-setxkbmap: fallback initial keyboard layouts'
+    'xorg-xset: fallback key-repeat and display-power controls'
+    'xwallpaper: fallback wallpaper through setbg'
+    'unclutter: hide the pointer in the fallback session'
+    'xf86-input-wacom: optional Wacom tablet support in X11'
+    'xkb-switch: fallback keyboard-layout shortcut'
+
+    # X11 clipboard and file previews
+    'clipmenu: fallback clipboard history; pulls in dmenu, xsel and xdotool'
+    'xclip: fallback clipboard helpers and picker output'
+    'ueberzugpp: fallback LF image previews'
+
+    # X11 capture and diagnostics
+    'flameshot: fallback screenshots'
+    'screenkey: optional X11 keyboard overlay'
+    'slop: optional X11 region selection in dmenurecord'
+    'xorg-xev: optional X11 key-event inspection from oneliners'
+    'xorg-xdpyinfo: optional X11 display diagnostics'
+
     # RSS reader
     'newsboat' 'urlscan' 'task-spooler'
 
     # torrent client
-    'transmission-cli: torrent client deamon and cli tools'
+    'transmission-cli: torrent client daemon and cli tools'
     'stig-git: torrent client TUI, broken dependency!'
     # better to install `stig` via `pipx install stig`
     'python-pipx: install python applications in isolated environments'
 
     # xournalpp
     'xournalpp: handwriting note taking'
-    'libxml2-legacy: temporary depency for xournalpp'
     'lua-lgi: for some xournalpp plugins'
     'libvips: for ImageActions plugin'
     'luarocks: for ImageActions plugin' # and install lib-vips with `sudo luarocks install lua-vips`
 
-    # audio
-    'pulseaudio: sound server'
-    'pulseaudio-alsa: alsa sink/source'
+    # audio controls and media integration
+    'pipewire-alsa: route ALSA-only applications through PipeWire'
     'alsa-utils: alsa mixer'
     'pavucontrol: pulseaudio mixer'
     'pulsemixer: command line mixer'
     'pamixer: command line mixer'
-
-    # bluetooth
-    'bluez-utils: bluetooth utilities'
-    'pulseaudio-bluetooth: bluetooth sink/source'
-    'blueman: bluetooth manager'
-    'playerctl: MPRIS media player controller'
-    'playerctld-systemd-unit: systemd unit for playerctld'
     'mpv-mpris: MPRIS support for MPV'
-    'mpd-mpris: MPRIS support for MPD'
+    'realtime-privileges'
+
+    # Bluetooth utilities
+    'bluez-utils: bluetooth utilities'
 
     # LaTeX and friends
     'texlive-basic: latex, pdflatex'
     'texlive-luatex: lualatex'
     'texlive-bibtexextra: biblatex'
     'biber: biblatex backend'
-    'texlive-binextra: latexindent, pdfjam'
+    'texlive-binextra: latexmk, latexindent, pdfjam'
+    # These are optional upstream, but required for latexindent to work.
     'perl-file-homedir: latexindent dependency'
     'perl-yaml-tiny: latexindent dependency'
     'texlive-fontsextra: various fonts such as stmaryrd, cmbright, iwona, and fetamont'
-    'texlive-latexextra: latexmk, zref-clever, tcolorbox, ...'
+    'texlive-latexextra: zref-clever, tcolorbox, ...'
     'texlive-mathscience: siunitx, physics, delimset, eqnlines, keytheorems, ...'
     'texlive-pictures: tikz'
     'texlive-fontutils: rarely needed'
@@ -150,11 +217,16 @@ optdepends=(
     'gnuplot: graphing/plotting utility'
     'mathematica: symbolic computation system'
 
+    # messaging
     'telegram-desktop'
-    'realtime-privileges'
 
+    # office
     'libreoffice-fresh: office suite'
+
+    # printing, scanning
     'cups: printing system'
+    'ipp-usb: printers/scanners over USB'
+    'simple-scan: simple scanning utility'
 
     # fallback editors
     'nano'
@@ -167,6 +239,9 @@ optdepends=(
     'pdf.tocgen: generate ToC for PDF documents'
     'qpdf: content-preserving PDF transformations'
 
+    # manually installed software
+    'libxml2-legacy: libxml2.so.2 for the manually installed Cisco Secure Client'
+
     # misc utilities
     'dysk: report disk usage, alternative to df'
     'lostfiles: find files not owned by any package'
@@ -175,8 +250,6 @@ optdepends=(
     'inetutils: network utilities'
     'smu: simple markup (suckless)'
     'obs-studio: screen recording'
-    'slop: select screen region (used for zoom effect)'
-    'screenkey: displays key presses (e.g. for screencasts)'
     'wget: network downloader'
     'syncthing: synchronize files across multiple devices'
 
