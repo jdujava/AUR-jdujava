@@ -2,22 +2,29 @@
 
 pkgname='fmenu-git'
 _pkgname='fmenu'
-pkgver=r12.30e24dc
+pkgver=r20.d38f2187
+epoch=1
 pkgrel=1
 pkgdesc='A fuzzy-selection dynamic menu and related scripts'
-arch=('i686' 'x86_64' 'armv7h' 'aarch64')
+arch=('any')
 _repo_prefix='github.com/jdujava'
 _repo_name="${pkgname%-git}"
 url="https://${_repo_prefix}/${_repo_name}"
 source=("${_repo_name}::git+https://${_repo_prefix}/${_repo_name}")
 license=('MIT')
-depends=('sh' 'fzf' 'dmenu' 'xsel')
+depends=('sh' 'zsh' 'fzf>=0.38' 'python' 'glib2' 'python-gobject')  # fdict uses zsh; fzfopen uses Python/GIO
 optdepends=(
+    'foot: Wayland menu terminal'
+    'wl-clipboard: Wayland clipboard copying'
+    'cliphist: Wayland clipboard history'
+    'wtype: type selections into Wayland applications'
+    'fd: file discovery in the file pickers'
+    'jq: Mango focus checks in the Wayland one-liner picker'
+    'dmenu: optional X11 menu fallback'
+    'xsel: optional X11 clipboard fallback'
     'xdotool: for typing out selection to the terminal'
-    'xdg-utils: for xdg-mime used in fzfopen'
     'gtk3: for gtk-launch used in fzfopen'
-    'libnotify: for notify-send used in fzfopen'
-    'dunst: for notify-send used in fzfopen'
+    'libnotify: for notifications from the Wayland one-liner picker'
     'man-db: for creating manpage index database used in mfzf'
     'pass: password manager used in passfmenu'
     'xclip: clipboard support for pass in passfmenu'
@@ -31,12 +38,20 @@ conflicts=("${_pkgname}")
 sha256sums=('SKIP')
 
 pkgver() {
-    cd "$srcdir/${_repo_name}"
-    (
-        set -o pipefail
-        git describe --long --tags 2>/dev/null | sed "s/^[A-Za-z\.\-]*//;s/\([^-]*-\)g/r\1/;s/-/./g" ||
-            printf "r%s.%s\n" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-    )
+    cd "$srcdir/$_repo_name" || return
+    if [[ $(git rev-parse --is-shallow-repository) != false ]]; then
+        printf '%s\n' 'pkgver requires complete Git history' >&2
+        return 1
+    fi
+    local count commit
+    count=$(git rev-list --count HEAD) || return
+    commit=$(git rev-parse HEAD) || return
+    printf 'r%s.%.8s\n' "$count" "$commit"
+}
+
+check() {
+    cd "$srcdir/$_repo_name" || return
+    python3 -B -m unittest discover -s tests
 }
 
 package() {
