@@ -1,0 +1,50 @@
+# Maintainer: Jonas Dujava <jonas.dujava@gmail.com>
+
+pkgname='mango-jd-git'
+_pkgname='mango'
+pkgver=0.18.3.r2280.gd5dc91cc
+epoch=1
+pkgrel=1
+pkgdesc='A Wayland compositor - custom Mango build'
+arch=('x86_64' 'aarch64')
+_repo_prefix='github.com/jdujava'
+_repo_name="${pkgname%-git}"
+url="https://${_repo_prefix}/${_repo_name}"
+source=("${_repo_name}::git+https://${_repo_prefix}/${_repo_name}#branch=desktop")
+license=('GPL-3.0-or-later')
+depends=('glibc' 'glib2' 'wlroots0.20' 'scenefx>=0.5' 'wayland' 'libinput'
+         'libxkbcommon' 'pcre2' 'cjson' 'pango' 'cairo' 'pixman' 'libdrm'
+         'libxcb' 'xcb-util-wm' 'dbus' 'systemd' 'xorg-xwayland')
+makedepends=('git' 'meson' 'ninja' 'pkgconf' 'wayland-protocols')
+provides=("mangowm=$pkgver" "mangowm-git=$pkgver" "mango=$pkgver" 'wayland-compositor')
+conflicts=('mango' 'mangowm' 'mangowm-git' 'mangowm-wlonly-git'
+           'mangowc' 'mangowc-git' 'mangowc-wllonly-git')
+backup=('etc/mango/config.conf' 'etc/mango/config.toml')
+options=('!debug' '!lto')
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "$srcdir/$_repo_name" || return
+    if [[ $(git rev-parse --is-shallow-repository) != false ]]; then
+        printf '%s\n' 'pkgver requires complete Git history' >&2
+        return 1
+    fi
+    local version count commit
+    version=$(sed -n "s/.*version *: *'\([^']*\)'.*/\1/p" meson.build | head -n 1)
+    [[ -n $version ]] || return 1
+    count=$(git rev-list --count HEAD) || return
+    commit=$(git rev-parse HEAD) || return
+    printf '%s.r%s.g%.8s\n' "$version" "$count" "$commit"
+}
+
+build() {
+    local reconfigure=()
+    [[ ! -f "$srcdir/build/build.ninja" ]] || reconfigure=(--reconfigure)
+    arch-meson "${reconfigure[@]}" "$srcdir/$_repo_name" "$srcdir/build" \
+        --wrap-mode=nofallback -Dxwayland=enabled
+    meson compile -C "$srcdir/build"
+}
+
+package() {
+    DESTDIR="$pkgdir" meson install -C "$srcdir/build" --no-rebuild
+}
